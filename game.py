@@ -26,10 +26,13 @@ def playGame():
         #print(answer)
         if number != useranswer:
             if number > useranswer:
+                print("Oh, no!")
                 print("Your number, {}, is too small".format(useranswer))
             else:
+                print("Ee, gads!")
                 print("Your number, {}, is too large".format(useranswer))
         else:
+            print("Woohoo!")
             return("Well done, {}! {} is the right answer!! You found my number in {} tries.".format(name, useranswer, guesscount))
             #break
 print(playGame())
