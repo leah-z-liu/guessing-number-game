@@ -26,9 +26,13 @@ def playgame(name):
                 if number > useranswer:
                     print("Oh, no!")
                     print(f"Your number, {useranswer}, is too small")
+                    if guesscount > 7:
+                        return 8
                 else:
                     print("Ee, gads!")
                     print(f"Your number, {useranswer}, is too large")
+                    if guesscount > 7:
+                        return 8
             else:
                 print("Woohoo!")
                 print(f"Well done, {name}! {useranswer} is the right answer!! You found my number in {guesscount} tries.")
@@ -65,21 +69,24 @@ def ask_playagain():
     reloopanswer = input("Type Y or N \n")
     if (reloopanswer != "Y") and (reloopanswer != "N"):
         print("Did not understand your answer-- Try again.")
-        ask_playagain()
+        return ask_playagain()
     else:
         return reloopanswer
 
 def reloop():
     """Loops through game until user decides to stop playing. Keeps track of past scores."""
     guesslist = []
-    print("Welcome to the guessing game!")
+    print("Welcome to the guessing game! You have 7 tries per game.")
     name = input("What is your name?")
     while True:
         guesscount = playgame(name)
         guesslist.append(guesscount)
         bestscore = min(guesslist)
-        print("Congrations on winning. Would you like to play again to improve your score?")
-        print(f"Your current best score is {bestscore}.")
+        if guesscount == 8:
+            print("You've guessed too many tries--try again.")
+        else:    
+            print("Congrations on winning.")
+        print(f"Would you like to play again to improve your score? Your current best score is {bestscore}.")
         if ask_playagain() == "N":
             return "Goodbye!"
                 
