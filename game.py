@@ -13,9 +13,7 @@
 #     else:
 #         congratulate player
 import random
-def playGame():
-    print("Welcome to the guessing game!")
-    name = input("What is your name?")
+def playgame(name):
     number =  random.randrange(1, 101)
     guesscount = 0
     #print (number)
@@ -35,7 +33,9 @@ def playGame():
                     print(f"Your number, {useranswer}, is too large")
             else:
                 print("Woohoo!")
-                return(f"Well done, {name}! {useranswer} is the right answer!! You found my number in {guesscount} tries.")
+                print(f"Well done, {name}! {useranswer} is the right answer!! You found my number in {guesscount} tries.")
+                return(guesscount)
+                #restart(name,useranswer,guesscount)
         else:
             print(f"That guess, {userinput} is not valid. Try again.")
 
@@ -60,6 +60,7 @@ def validateinput(userinput):
             return False
     except ValueError:
         return False    
+    # using two ifs instead of try/except
     # if userinput.isdigit() == True:
     #     if int(userinput) >= 1 and int(userinput) < 101:
     #         return int(userinput)
@@ -70,4 +71,26 @@ def validateinput(userinput):
 
 
 
-print(playGame())
+
+#create function that loops through playgame function
+    #save guesscount variable from playgame function
+    #variable to track the lowest guess thus far
+    #ask if user wants to play again
+        #if yes, call playgame function
+
+
+def reloop():
+    guesslist = []
+    print("Welcome to the guessing game!")
+    name = input("What is your name?")
+    while True:
+        guesscount = playgame(name)
+        guesslist.append(guesscount)
+        bestscore = min(guesslist)
+        print("Congrations on winning. Would you like to play again to improve your score?")
+        print(f"Your current best score is {bestscore}.")
+        reloopanswer = input("Type Y or N \n")
+        if reloopanswer != "Y":
+            return "Goodbye!"
+
+print(reloop())
